@@ -1,0 +1,46 @@
+<div class="card my-5">
+  <h1>Overview</h1>
+    <div class="card-body">
+      <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Rating</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let movie of movies">
+            <td>{{ movie.id }}</td>
+            <td [routerLink]="['/movie', movie.id]" style="cursor: pointer">{{ movie.name }}</td>
+            <td>{{ movie.rating }}/10</td>
+            <td>
+              <button type="button" class="btn-close" aria-label="Close" (click)="deleteMovie(movie)"></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <form [formGroup]="addMovieForm" #form (ngSubmit)="addMovie()">
+        <div class="input-group">
+          <div class="col-3 m-2">
+            <label for="name" class="form-label">name</label>
+            <input type="text" formControlName="name" class="form-control">
+          </div>
+          <div class="col-3 m-2">
+            <label for="name" class="form-label">rating</label>
+            <input type="text" formControlName="rating" class="form-control">
+          </div>
+          <div class="col-3 m-2">
+            <label for="name" class="form-label">release year</label>
+            <input type="text" formControlName=releaseYear class="form-control">
+          </div>
+        </div>
+        <div class="col-8 m-2">
+          <label for="name" class="form-label">comment</label>
+          <textarea type="text" formControlName="description" class="form-control"></textarea>
+        </div>
+        <button type="submit" class="btn btn-dark m-2">submit</button>
+      </form>
+    </div>
+  </div>

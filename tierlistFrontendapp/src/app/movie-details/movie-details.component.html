@@ -1,0 +1,14 @@
+<h2>Movie Details</h2>
+
+<div *ngIf="movie">
+  <p>id: {{ movie.id }}</p>
+  <p>name: {{ movie.name }}</p>
+  <p>rating: {{ movie.rating }}</p>
+  <p>description: {{ movie.description }}</p>
+  <p>release year: {{ movie.releaseYear }}</p>
+  <!-- Add more details as needed -->
+</div>
+
+<div *ngIf="!movie">
+  <p>Loading product details...</p>
+</div>
