@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: movie
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+
+  backend:
+    build: 
+      context: ./springboot-tierlist-app
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+
+
+  frontend:
+    build: 
+      context: ./tierlistFrontendapp
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
