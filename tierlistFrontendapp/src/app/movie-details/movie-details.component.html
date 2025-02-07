@@ -1,14 +1,33 @@
-<h2>Movie Details</h2>
+<h2 class="text-center my-5">Movie Details</h2>
 
-<div *ngIf="movie">
-  <p>id: {{ movie.id }}</p>
-  <p>name: {{ movie.name }}</p>
-  <p>rating: {{ movie.rating }}</p>
-  <p>description: {{ movie.description }}</p>
-  <p>release year: {{ movie.releaseYear }}</p>
-  <!-- Add more details as needed -->
+<div *ngIf="movie" class="container">
+  <div class="card">
+    <div class="card-header bg-dark text-white">
+      <h4>{{ movie.name }}</h4>
+    </div>
+    <div class="card-body">
+      <dl class="row">
+        <dt class="col-sm-3">ID</dt>
+        <dd class="col-sm-9">{{ movie.id }}</dd>
+
+        <dt class="col-sm-3">Name</dt>
+        <dd class="col-sm-9">{{ movie.name }}</dd>
+
+        <dt class="col-sm-3">Rating</dt>
+        <dd class="col-sm-9">{{ movie.rating }} / 10</dd>
+
+        <dt class="col-sm-3">Description</dt>
+        <dd class="col-sm-9">{{ movie.description }}</dd>
+
+        <dt class="col-sm-3">Release Year</dt>
+        <dd class="col-sm-9">{{ movie.releaseYear }}</dd>
+      </dl>
+
+      <button class="btn btn-primary" (click)="goBack()">Back to Movies List</button>
+    </div>
+  </div>
 </div>
 
-<div *ngIf="!movie">
-  <p>Loading product details...</p>
+<div *ngIf="!movie" class="text-center my-5">
+  <p>Loading movie details...</p>
 </div>

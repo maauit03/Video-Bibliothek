@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Movie } from '../models/movie';
 import { MovieService } from '../services/movie.service';
 
@@ -12,7 +12,7 @@ export class MovieDetailsComponent implements OnInit {
 
   movie!: Movie; // Adjust the type based on your product data structure
 
-  constructor(private movieService: MovieService, private route: ActivatedRoute) { }
+  constructor(private movieService: MovieService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -29,5 +29,7 @@ export class MovieDetailsComponent implements OnInit {
       console.error('Error fetching product details:', error);
     }
   }
-
+  goBack(): void {
+    this.router.navigate(['']); // Navigates back to the movies list page
+  }
 }
