@@ -1,30 +1,50 @@
-version: '3'
+version: '3.8'
 
 services:
-
   postgres:
     image: postgres:latest
+    container_name: privat-postgres
+    restart: always
     environment:
       POSTGRES_DB: movie
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
     ports:
       - "5432:5432"
+    networks:
+      - privat_network
 
   backend:
-    build: 
+    build:
       context: ./springboot-tierlist-app
       dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
-    network_mode: host
+    container_name: privat-backend
+    restart: always
     depends_on:
       - postgres
-
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/movie
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_PROFILES_ACTIVE: prod
+    ports:
+      - "8080:8080"
+    networks:
+      - privat_network
 
   frontend:
-    build: 
+    build:
       context: ./tierlistFrontendapp
       dockerfile: Dockerfile
+    container_name: privat-frontend
+    restart: always
+    depends_on:
+      - backend
     ports:
       - "80:80"
+    networks:
+      - privat_network
+
+networks:
+  privat_network:
+    driver: bridge
